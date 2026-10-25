@@ -1,0 +1,44 @@
+# 配置模板：复制为同目录下的 application.yml 后填入真实值
+#   Windows: Copy-Item application-example.yml application.yml
+#   macOS/Linux: cp application-example.yml application.yml
+# application.yml 已被 .gitignore 忽略，不会提交到仓库。
+server:
+  port: 8088
+
+spring:
+  cache:
+    type: simple
+  datasource:
+    url: jdbc:mysql://localhost:3306/medical_data?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    # 建议通过环境变量 DB_PASSWORD 注入，避免明文写入文件
+    password: ${DB_PASSWORD:CHANGE_ME}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+jwt:
+  # 请替换为自定义密钥，至少 32 字符
+  secret: ${JWT_SECRET:CHANGE_ME_TO_A_RANDOM_SECRET_AT_LEAST_32_CHARS}
+  expiration: 2592000000
+
+# DeepSeek API 配置（Key 请通过环境变量 DEEPSEEK_API_KEY 提供）
+deepseek:
+  api:
+    key: ${DEEPSEEK_API_KEY:}
+    url: https://api.deepseek.com/v1/chat/completions
+    model: deepseek-chat
+    timeout: 30000
+
+# 可选：如果未配置 DeepSeek，可在环境变量中配置 OpenAI API KEY
+openai:
+  api-key: ${OPENAI_API_KEY:}

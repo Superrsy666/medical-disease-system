@@ -1,0 +1,45 @@
+# ===== 依赖与虚拟环境 =====
+.venv/
+.venv-1/
+node_modules/
+**/node_modules/
+.m2-local/
+__pycache__/
+*.py[cod]
+
+# ===== 构建产物 =====
+backend/target/
+frontend/dist/
+*.jar
+
+# ===== 本地模型缓存（bge-small-zh，约 95MB）=====
+backend_py/models/
+
+# ===== 本地私密配置：只保留 *.example.* 模板，真实配置不入库 =====
+backend/src/main/resources/application.yml
+backend_py/config_local.py
+.env
+.env.*
+
+# ===== 部署脚本与服务器凭据（含 root 密码、数据库导出、上传脚本）=====
+.deploy/
+
+# ===== 日志与调试输出 =====
+*.log
+logs/
+
+# ===== IDE / 工具缓存 =====
+.vscode/
+.idea/
+.qoder/
+.lark-slides/
+.github/modernize/
+
+# ===== 一次性临时脚本 =====
+_*.py
+scripts/inpaint_watermark.py
+scripts/remove_watermark.py
+
+# ===== 与本项目无关的大文件 =====
+*.pptx
+豆包.jpg
